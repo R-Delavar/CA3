@@ -254,7 +254,6 @@ int postLiking(char* name, int postID,message* dummyMessage,likes* dummyLikes,ch
     while(placeHolder!=NULL){
                     if(placeHolder->username==savedName){
                         if(placeHolder->postID==postID){
-                            printf("you have already liked this post");
                             return 0;
                         }
                     }
@@ -284,13 +283,18 @@ int postLiking(char* name, int postID,message* dummyMessage,likes* dummyLikes,ch
     printf("post does not exist\n");
 }
 void postSearcher(message* dummyMessage,char* username, char* password){
+    int counter=0;
     message* tempMessage=dummyMessage->next;
     /*the loop below searches all the message to find the post with the wanted username and prints them*/
     while(tempMessage!=NULL){
         if(!strcmp(tempMessage->username,username)){
             printf("post: %s \n postID:%d\n likes:%d\n\n",tempMessage->content,tempMessage->postID,tempMessage->likes);
+            counter++;
         }
         tempMessage=tempMessage->next;
+    }
+    if(counter==0){
+        printf("no messages have been posted yet!\n");
     }
 }
 int deletePost(message* dummyMessage,int postID, char* name1){
